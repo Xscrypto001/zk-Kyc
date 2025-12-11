@@ -1,13 +1,190 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-app</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zkKYC Platform - Privacy-Preserving Identity on Base</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container" id="app">
+        <!-- Content will be rendered by React -->
+    </div>
+    
+    <!-- Load React and Babel for JSX -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Ethers.js for blockchain interaction -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+    
+    <!-- Main App Script (with JSX) -->
+    <script type="text/babel" data-presets="react" data-type="module">
+        // Import components
+        const { useState, useEffect } = React;
+        
+        // Import components (in a real app, these would be separate files)
+        const KYCForm = ({ contract, userAddress }) => {
+            // ... KYCForm component implementation from above
+            return (
+                <div className="kyc-form-container">
+                    <h2><i className="fas fa-user-shield"></i> Zero-Knowledge KYC Verification</h2>
+                    {/* Form content would go here */}
+                </div>
+            );
+        };
+        
+        const App = () => {
+            const [userAddress, setUserAddress] = useState('');
+            const [contract, setContract] = useState(null);
+            const [network, setNetwork] = useState('Base');
+            
+            const connectWallet = async () => {
+                if (window.ethereum) {
+                    try {
+                        await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        const signer = provider.getSigner();
+                        const address = await signer.getAddress();
+                        setUserAddress(address);
+                        
+                        // Load contract (simplified)
+                        const contractAddress = '0x...'; // Your contract address
+                        const contractABI = []; // Your contract ABI
+                        const kycContract = new ethers.Contract(contractAddress, contractABI, signer);
+                        setContract(kycContract);
+                        
+                        // Get network
+                        const network = await provider.getNetwork();
+                        setNetwork(network.name);
+                    } catch (error) {
+                        console.error('Wallet connection failed:', error);
+                    }
+                } else {
+                    alert('Please install MetaMask!');
+                }
+            };
+            
+            return (
+                <>
+                    <header>
+                        <h1>zkKYC Platform</h1>
+                        <p>Privacy-preserving identity verification on Base Network using zero-knowledge proofs</p>
+                        
+                        <div className="platform-stats">
+                            <div className="stat-card">
+                                <h3>2,847</h3>
+                                <p>ZK Proofs Generated</p>
+                            </div>
+                            <div className="stat-card">
+                                <h3>1,532</h3>
+                                <p>Identities Verified</p>
+                            </div>
+                            <div className="stat-card">
+                                <h3>$0.12</h3>
+                                <p>Avg Verification Cost</p>
+                            </div>
+                            <div className="stat-card">
+                                <h3>0</h3>
+                                <p>Personal Data Leaked</p>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <main>
+                        {!userAddress ? (
+                            <div className="card" style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}>
+                                <h2><i className="fas fa-wallet"></i> Connect Your Wallet</h2>
+                                <p>Connect your wallet to start using privacy-preserving KYC on Base Network</p>
+                                <button 
+                                    onClick={connectWallet}
+                                    className="submit-btn"
+                                    style={{ marginTop: '20px' }}
+                                >
+                                    <i className="fas fa-plug"></i> Connect to Base
+                                </button>
+                                <div className="network-info">
+                                    <i className="fas fa-layer-group"></i> Powered by Base L2 (Ethereum)
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="main-content">
+                                    <div className="card">
+                                        <h2><i className="fas fa-id-card"></i> KYC Verification</h2>
+                                        <KYCForm contract={contract} userAddress={userAddress} />
+                                    </div>
+                                    
+                                    <div className="card">
+                                        <h2><i className="fas fa-check-circle"></i> Your Verifications</h2>
+                                        <div className="verification-log">
+                                            <div className="log-entry">
+                                                <div className="timestamp">2024-03-15 14:30:22</div>
+                                                <div className="details">
+                                                    <span>Proof #A3F8B2C1</span>
+                                                    <span className="status success">✓ Verified</span>
+                                                </div>
+                                            </div>
+                                            <div className="log-entry">
+                                                <div className="timestamp">2024-03-10 09:15:47</div>
+                                                <div className="details">
+                                                    <span>Proof #D9E4F5A2</span>
+                                                    <span className="status success">✓ Verified</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="privacy-notice">
+                                            <h3>🔐 How Zero-Knowledge Proofs Work</h3>
+                                            <p>ZK proofs allow you to prove you have valid KYC without revealing:</p>
+                                            <ul>
+                                                <li>Your name or personal details</li>
+                                                <li>Your date of birth</li>
+                                                <li>Your document number</li>
+                                                <li>Your nationality</li>
+                                            </ul>
+                                            <p>The proof only confirms that you meet the requirements.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="card">
+                                    <h2><i className="fas fa-shield-alt"></i> Security & Privacy Features</h2>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                                        <div className="feature">
+                                            <h3><i className="fas fa-user-secret"></i> Data Minimization</h3>
+                                            <p>Only minimal required data is collected, encrypted, and never stored on-chain.</p>
+                                        </div>
+                                        <div className="feature">
+                                            <h3><i className="fas fa-fingerprint"></i> Nullifier System</h3>
+                                            <p>Unique nullifiers prevent proof replay while maintaining anonymity.</p>
+                                        </div>
+                                        <div className="feature">
+                                            <h3><i className="fas fa-tree"></i> Merkle Trees</h3>
+                                            <p>Credentials are stored in Merkle trees for efficient verification.</p>
+                                        </div>
+                                        <div className="feature">
+                                            <h3><i className="fas fa-expand-arrows-alt"></i> Scalable on Base</h3>
+                                            <p>Low-cost transactions make frequent proof verification practical.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </main>
+                    
+                    <footer>
+                        <p>zkKYC Platform © 2024 | Built on Base Network | Zero-Knowledge Identity Verification</p>
+                        <p>This is a conceptual demonstration. Not audited for production use.</p>
+                    </footer>
+                </>
+            );
+        };
+        
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+</body>
 </html>
