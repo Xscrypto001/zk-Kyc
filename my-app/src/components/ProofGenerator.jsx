@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import './ProofGenerator.css';
+import '../style.css';
 
 const ProofGenerator = ({ userAddress, contract, credential }) => {
     const [requirements, setRequirements] = useState({

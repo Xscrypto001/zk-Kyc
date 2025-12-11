@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import './VerifierDashboard.css';
+import '../style.css';
 
 const VerifierDashboard = ({ contract, userAddress }) => {
     const [verifications, setVerifications] = useState([]);
