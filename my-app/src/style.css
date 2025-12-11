@@ -18,7 +18,6 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -31,7 +30,7 @@ body {
 header {
     text-align: center;
     padding: 40px 20px;
-    color: white;
+    color: black;
 }
 
 header h1 {
@@ -62,7 +61,7 @@ header p {
     border-radius: var(--border-radius);
     padding: 25px;
     text-align: center;
-    color: white;
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -89,7 +88,7 @@ header p {
 }
 
 .card {
-    background: white;
+    background: black;
     border-radius: var(--border-radius);
     padding: 30px;
     box-shadow: var(--box-shadow);
@@ -108,7 +107,7 @@ header p {
 }
 
 .kyc-form-container {
-    background: white;
+    background: black;
     border-radius: var(--border-radius);
     padding: 40px;
     box-shadow: var(--box-shadow);
@@ -184,7 +183,7 @@ header p {
 
 .submit-btn {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    color: black;
     border: none;
     padding: 16px 32px;
     font-size: 1.1rem;
@@ -225,7 +224,7 @@ header p {
 
 .verify-btn {
     background: var(--success-color);
-    color: white;
+    color: black;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
@@ -305,7 +304,7 @@ header p {
 footer {
     text-align: center;
     padding: 40px 20px;
-    color: white;
+    color: black;
     opacity: 0.8;
     margin-top: 40px;
 }
