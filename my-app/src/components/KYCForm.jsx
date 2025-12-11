@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import { generateProof, generateNullifier } from '../utils/zkProofs';
-import './KYCForm.css';
+import './style.css';
 
 const KYCForm = ({ contract, userAddress }) => {
     const [formData, setFormData] = useState({

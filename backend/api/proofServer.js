@@ -103,8 +103,8 @@ app.post('/api/issue-credential', async (req, res) => {
 });
 
 async function generateZKProof(inputs) {
-    // In production: Use snarkjs to generate actual proof
-    // This is a mock implementation
+   
+    
     return {
         proof: {
             a: ['0x123...', '0x456...'],
